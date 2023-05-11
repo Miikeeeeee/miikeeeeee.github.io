@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Principal</title>
+<style type="text/css">
+
+/* Parte de entrada no site */
+body {
+	background-color : white;
+}
+
+.galeria {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  font-family: Cambria;
+}
+
+.imagem-com-texto {
+  position: relative;
+  flex: 0 0 100%;
+}
+
+.imagem-com-texto img {
+  width: 100%;
+}
+
+.texto {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.texto h2 {
+  margin-top: 0;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seta:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.seta-esquerda {
+  left: 0;
+}
+
+.seta-direita {
+  right: 0;
+}
+
+/* Botao RS3 */
+
+
+</style>
+</head>
+
+<body>
+
+<!-- Acesso as frames -->
+<frameset cols="50%, 50%">
+  <frame src="topframe.html" name="topframe">
+</frameset>
+
+<!-- Parte de entrada no site -->
+  <div class="galeria" id = "galeria">
+    <div class="imagem-com-texto">
+      <img src=".\ETRON.jpg" alt="Imagem 1">
+      <div class="texto" id = "ETRON">
+        <h2>Audi e-tron GT</h2>
+        <button>Saiba Mais</button>
+      </div>
+    </div>
+  
+    <div class="imagem-com-texto">
+      <img src=".\Audis.jpg" alt="Imagem 2">
+      <div class="texto">
+        <h2>Audi R8 V10 PLUS</h2>
+        <button>Saiba Mais</button>
+      </div>
+    </div>
+    
+    <div class="seta seta-esquerda">&lt;</div>
+    <div class="seta seta-direita">&gt;</div>
+  </div>
+<script>
+const galeria = document.querySelector('.galeria');
+const imagens = document.querySelectorAll('.imagem-com-texto');
+const setaEsquerda = document.querySelector('.seta-esquerda');
+const setaDireita = document.querySelector('.seta-direita');
+let indiceAtual = 0;
+let intervalo;
+
+function atualizarGaleria() {
+  imagens.forEach((imagem, indice) => {
+    if (indice === indiceAtual) {
+      imagem.style.display = 'block';
+    } else {
+      imagem.style.display = 'none';
+    }
+  });
+}
+
+function avancarImagem() {
+  indiceAtual++;
+  if (indiceAtual >= imagens.length) {
+    indiceAtual = 0;
+  }
+  atualizarGaleria();
+}
+
+atualizarGaleria();
+
+setaEsquerda.addEventListener('click', () => {
+  indiceAtual--;
+  if (indiceAtual < 0) {
+    indiceAtual = imagens.length - 1;
+  }
+  atualizarGaleria();
+});
+
+setaDireita.addEventListener('click', () => {
+  indiceAtual++;
+  if (indiceAtual >= imagens.length) {
+    indiceAtual = 0;
+  }
+  atualizarGaleria();
+});
+
+intervalo = setInterval(avancarImagem, 5000); // avança as imagens a cada 5 segundos
+</script>
+
+</script>
+
+</body>
+</html>
